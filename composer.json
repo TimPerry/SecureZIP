@@ -1,0 +1,16 @@
+{
+    "name": "Applicious/package_name",
+    "description": "HTML5 drag and drop file uploader and secure password zipper",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Tim Perry",
+            "email": "tim@applicious.co"
+        }
+    ],
+    "require": {
+        "silex/silex": "v1.1.2",
+        "twig/twig": "1.6.5"
+    }
+}
