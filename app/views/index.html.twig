@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>SecureZIP</title>
-</head>
-<body>
+{% include '_includes/header.html.twig' %}
+<form>
     <input id="upload_button" type="file"/>
-    <button id="upload_area" onclick="document.getElementById('upload_button').click()" title="Click or Drag Image">Drop files here</button>
-</body>
-</html>
+    <button id="upload_area" onclick="document.getElementById('upload_button').click();" title="Click or drop files here">Drop files here</button>
+</form>
+{% include '_includes/footer.html.twig' %}
