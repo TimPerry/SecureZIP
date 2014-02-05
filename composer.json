@@ -14,5 +14,12 @@
         "twig/twig": "1.6.5",
         "symfony/filesystem": "v2.3.9",
         "symfony/process": "2.0.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SZIP\\": "app/src/SZIP",
+            "SZIP\\UploadsManager\\": "app/src/SZIP/UploadsManager",
+            "SZIP\\Zipper\\": "app/src/SZIP/Zipper"
+        }
     }
 }

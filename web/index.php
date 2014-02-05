@@ -3,8 +3,10 @@
 	use Symfony\Component\Filesystem\Filesystem;
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Component\Process\Process;
+	use SZIP\UploadsManager\UploadsManager;
+	use SZIP\Zipper\Secure7zZipper;
 
-define('APP_DIR', realpath(__DIR__ . "/../app/"));
+	define('APP_DIR', realpath(__DIR__ . "/../app/"));
 
 	require_once __DIR__ . '/../vendor/autoload.php';
 	$app = new Silex\Application();
@@ -32,40 +34,14 @@ define('APP_DIR', realpath(__DIR__ . "/../app/"));
 		$full_zip_loc = __DIR__ . $zip_loc;
 
 		$fs = new Filesystem();
+
 		try {
 
-			if( ! $fs->exists( $full_folder_loc ) ) {
-				$fs->mkdir( $full_folder_loc );
-			}
+			$uploadManager = new UploadsManager( $files, $fs, $full_folder_loc );
+			$uploadManager->processUploads();
 
-			foreach ($files as $file) {
-
-				$file->move( $full_folder_loc, $file->getClientOriginalName());
-
-			}
-
-			$command = implode( "",
-
-					array(
-
-						'7za a -tzip \'-p',
-						$password,
-						'\' -mem=AES256 ',
-						$full_zip_loc,
-						' ',
-						$full_folder_loc
-
-					)
-
-			);
-			$process = new Process( $command );
-			$process->run();
-
-			if (!$process->isSuccessful()) {
-				var_dump($process);
-				exit;
-				throw new \RuntimeException($process->getErrorOutput());
-			}
+			$zipper = new Secure7zZipper( $full_folder_loc, $full_zip_loc, $password );
+			$zipper->zip();
 
 			return $app['twig']->render('upload.html.twig', array(
 
