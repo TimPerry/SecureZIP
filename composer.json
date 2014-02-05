@@ -11,6 +11,8 @@
     ],
     "require": {
         "silex/silex": "v1.1.2",
-        "twig/twig": "1.6.5"
+        "twig/twig": "1.6.5",
+        "symfony/filesystem": "v2.3.9",
+        "symfony/process": "2.0.7"
     }
 }
